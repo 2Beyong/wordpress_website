@@ -1,7 +1,7 @@
 <template>
     <div v-if="post">
         <h1>{{ post.title.rendered }}</h1>
-        <div v-html="post.content.rendered"></div>
+        <div v-html="post.content.rendered" class="article"></div>
     </div>
 </template>
 
@@ -22,3 +22,13 @@ onMounted(async () => {
     }
 });
 </script>
+
+<style>
+.article {
+    p {
+        /*color: red*/
+        margin: 0.5rem;
+    }
+
+}
+</style>
