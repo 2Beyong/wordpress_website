@@ -24,7 +24,7 @@ export const getPosts = async (page = 1, perPage = 10) => {
 
 export const getPostById = async (id) => {
   try {
-    const response = await axios.get(`${BASE_URL}/posts/${id}`);
+    const response = await axios.get(`${BASE_URL}/posts/${id}?_embed`);
     return response.data;
   } catch (error) {
     console.error('Error fetching post:', error);
