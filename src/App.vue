@@ -1,12 +1,17 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+
+import { RouterView } from 'vue-router'
 
 </script>
 
 <template>
 
-
-  <RouterView />
+  <RouterView v-slot="{ Component }">
+    <KeepAlive>
+      <component :is="Component" v-if="$route.meta.KeepAlive"></component>
+    </KeepAlive>
+    <component :is="Component" v-if="!$route.meta.KeepAlive"></component>
+  </RouterView>
 </template>
 
 <style scoped>
