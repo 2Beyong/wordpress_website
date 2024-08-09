@@ -26,7 +26,7 @@
             <div class="text-gray-600 mb-4">
                 <span>By {{ post.author_name != undefined ? post.author_name : '未知' }}</span> | <span>{{
                     formatDate(post.date)
-                    }}</span>
+                }}</span>
             </div>
             <!-- <div v-html="post.content.rendered" class="post-content"></div> -->
             <!--<div v-html="formattedContent" class="post-content"></div>-->
@@ -72,7 +72,7 @@ const goBack = () => {
     router.back();
 };
 const formatDate = (date) => {
-    return new Date(date).toLocaleString();
+    return new Date(date).toLocaleDateString();
 };
 
 

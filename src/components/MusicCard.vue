@@ -1,25 +1,28 @@
 <template>
-    <div class="p-4 max-w-sm mx-auto bg-white rounded-xl shadow-md space-y-4 mb-4 ">
-        <!-- 歌曲名 -->
-        <div class="flex justify-between items-center ">
-            <div class="text-lg font-bold flex items-center" style="color: #C20C0C;">{{ songTitle }}</div>
+    <div class="p-4 max-w-sm mx-auto bg-white rounded-xl shadow-md space-y-4 mb-4"
+        :style="{ transform: `rotate(${randomRotation}deg)` }">
+        <!-- 歌曲名和可视化切换按钮 -->
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-2 sm:space-y-0">
+            <div class="text-lg font-bold " style="color: #C20C0C;">
+                {{ songTitle }}
+            </div>
             <!-- 可视化切换按钮 -->
             <button @click="useAnalyser = !useAnalyser"
-                class=" text-sm text-white bg-[#C20C0C] hover:bg-blue-700 rounded-full px-2 py-1 shadow-md">
+                class="text-sm text-white bg-[#C20C0C] hover:bg-blue-700 rounded-full px-2 py-1 shadow-md w-full sm:w-auto">
                 可视化切换
             </button>
         </div>
+
+        <!-- 艺术家名称 -->
         <p class="text-sm text-gray-500">{{ artistName }}</p>
 
-
         <!-- 可视化区域 -->
-        <div v-if="useAnalyser == true" class=" p-2 rounded-lg bg-gray-100">
-            <div class="flex items-center space-x-2">
+        <div v-if="useAnalyser" class="p-2 rounded-lg bg-gray-100">
+            <div class="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
                 <button @click="initAnalyser"
-                    class="text-sm text-white bg-[#C20C0C] hover:bg-red-700 rounded-full px-2 py-1 shadow-md">
-                    Got
-                </button>
-                <audio controls ref="audio" :src="finalAudioSrc" crossOrigin="anonymous" class="flex-grow"></audio>
+                    class="text-sm text-white bg-[#C20C0C] hover:bg-blue-700 rounded-full px-2 py-1 shadow-md w-full sm:w-auto">Got</button>
+                <audio controls ref="audio" :src="finalAudioSrc" crossOrigin="anonymous"
+                    class="flex-grow w-full max-w-full"></audio>
             </div>
             <canvas ref="canvas" class="w-full h-24 mt-2 rounded-lg bg-white"></canvas>
         </div>
@@ -52,14 +55,20 @@ export default {
             //test_src: "http://m801.music.126.net/20240808182154/b22a7becf2727029488746398929f234/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/34569569119/d520/365b/14c9/bc9b12c7d5aeb0da4e3c1615b02c86e7.mp3",
             //test_src: "https://music.163.com/song/media/outer/url?id=1991309789.mp3",
             finalAudioSrc: "",
+
+            randomRotation: 0, // 用于存储随机角度
         };
     },
     mounted() {
         //this.getTrueUrl()
         //this.setupCanvas();
-
+        this.randomRotation = this.generateRandomRotation();
     },
     methods: {
+        generateRandomRotation() {
+            // 生成一个 -5 到 5 度之间的随机角度
+            return Math.floor(Math.random() * 11) - 5;
+        },
         async getTrueUrl() {
             const trueUrl = await fetchFinalMusicUrl(this.audioSrc)
             console.log(trueUrl)
