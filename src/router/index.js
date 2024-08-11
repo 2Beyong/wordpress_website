@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import PostsList from '../components/PostsList.vue'
 import PostDetail from '../components/PostDetail.vue'
 //import { KeepAlive } from 'vue';
@@ -21,7 +21,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory('/blog/'),
   routes
 })
 

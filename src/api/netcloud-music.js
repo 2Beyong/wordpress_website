@@ -12,7 +12,7 @@ async function fetchFinalMusicUrl(originalUrl) {
     const songId = match[1]
 
     // 调用你创建的 API 接口
-    const response = await axios.get(`http://101.35.186.86:8000/get-final-url`, {
+    const response = await axios.get(`https://www.toori.top/get-final-url`, {
       params: {
         song_id: songId
       }
